@@ -1,4 +1,3 @@
-# miniautorizadorVr
 # Mini autorizador
 
 A VR processa todos os dias diversas transações de Vale Refeição e Vale Alimentação, entre outras.
