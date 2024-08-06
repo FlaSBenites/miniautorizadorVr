@@ -1,6 +1,9 @@
 package com.br.vr.controller;
 
+
+import com.br.vr.dto.TransacaoRequest;
 import com.br.vr.service.CartaoService;
+import com.br.vr.service.TransacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,51 +16,16 @@ import java.math.BigDecimal;
 public class TransacaoController {
 
     @Autowired
-    private CartaoService cartaoService;
+    private TransacaoService transacaoService;
 
     @PostMapping
     public ResponseEntity<String> realizarTransacao(@RequestBody TransacaoRequest transacaoRequest) {
-        boolean transacaoAutorizada = cartaoService.realizarTransacao(
-                transacaoRequest.getNumeroCartao(),
-                transacaoRequest.getSenhaCartao(),
-                transacaoRequest.getValor()
-        );
+        boolean transacaoAutorizada = transacaoService.realizarTransacao(transacaoRequest);
 
         if (transacaoAutorizada) {
             return ResponseEntity.status(HttpStatus.CREATED).body("OK");
         } else {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(cartaoService.getMotivoFalha());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(transacaoService.getMotivoFalha());
         }
-    }
-}
-
-class TransacaoRequest {
-    private String numeroCartao;
-    private String senhaCartao;
-    private BigDecimal valor;
-
-    // Getters and setters
-    public String getNumeroCartao() {
-        return numeroCartao;
-    }
-
-    public void setNumeroCartao(String numeroCartao) {
-        this.numeroCartao = numeroCartao;
-    }
-
-    public String getSenhaCartao() {
-        return senhaCartao;
-    }
-
-    public void setSenhaCartao(String senhaCartao) {
-        this.senhaCartao = senhaCartao;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
     }
 }

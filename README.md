@@ -23,3 +23,20 @@ Uma transação pode ser autorizada se:
 
 Caso uma dessas regras não ser atendida, a transação não será autorizada.
 
+## Estrutura do Projeto
+|
+|-> MiniautorizadorVrApplication
+|
+|-->controller
+|   |-->CartaoController
+|   |-->TransacaoController
+|-->dto
+|   |-->TransacaoRequest
+|-->model
+|   |-->Cartao
+|-->repository
+|   |-->CartaoRepository
+|-->service
+|   |-->CartaoService
+|   |-->TransacaoService
+
